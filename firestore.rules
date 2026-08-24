@@ -1,0 +1,48 @@
+rules_version = '2';
+
+// ─────────────────────────────────────────────────────────────
+//  RAID ANALYSIS WING — Firestore security rules
+//  Replace PASTE_YOUR_ADMIN_UID with the admin UID you placed
+//  in src/constants.ts, then publish these rules in the
+//  Firebase Console (Firestore Database → Rules).
+// ─────────────────────────────────────────────────────────────
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null && request.auth.uid == "mOdpimBuKfT6oeP3vosqZEkLjqz1";
+    }
+
+    // Published content — anyone may read, only the admin may write.
+    match /team/{doc} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /officers/{doc} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /news/{doc} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /gallery/{doc} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /heroImages/{doc} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Forms — anyone may submit a new record, only the admin may read/update/delete.
+    match /applications/{doc} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+    match /messages/{doc} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+  }
+}

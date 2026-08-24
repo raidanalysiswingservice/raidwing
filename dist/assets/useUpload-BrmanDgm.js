@@ -1,0 +1,1 @@
+import{r as o,v as n}from"./index-D18eXaES.js";function f(u){const[a,e]=o.useState(!1),[l,r]=o.useState(null);return{busy:a,error:l,upload:async s=>{if(!s)return null;e(!0),r(null);const t=await n(s,u);return e(!1),t.ok||r(t.error),t},clearError:()=>r(null)}}export{f as u};

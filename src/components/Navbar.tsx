@@ -67,11 +67,15 @@ export function Navbar() {
           <button
             className="nav-toggle"
             aria-expanded={mobileOpen}
-            aria-label="Toggle menu"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
             onClick={() => setMobileOpen((v) => !v)}
           >
             {mobileOpen ? <CloseCircleIcon size={26} /> : <HamburgerMenuIcon size={26} />}
           </button>
+
+          <span className="nav-brand" aria-hidden="true">
+            {SITE_NAME}
+          </span>
 
           <ul className={`nav-list ${mobileOpen ? "is-open" : ""}`}>
             {NAV.map((item) => {
